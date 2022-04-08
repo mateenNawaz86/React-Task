@@ -1,7 +1,14 @@
 import React from "react";
+import InputForm from "./components/InputForm";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <div className="card">
+        <InputForm />
+      </div>
+    </>
+  );
 };
 
 export default App;
