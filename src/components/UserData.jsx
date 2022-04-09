@@ -3,40 +3,22 @@ import styled from "styled-components";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 
-const UserData = () => {
-  const userData = [
-    {
-      name: "Mateen",
-      salary: 450,
-    },
-    {
-      name: "Mateen",
-      salary: 450,
-    },
-    {
-      name: "Mateen",
-      salary: 450,
-    },
-  ];
+const UserData = (props) => {
   return (
     <>
       <Container>
         <h1>Employee List</h1>
         <ListContainer>
-          {userData.map((item, index) => {
-            return (
-              <>
-                <UserList>
-                  <h2>{item.name}</h2>
-                  <p>${item.salary}</p>
-                </UserList>
-                <UserIcons>
-                  <FiEdit className="edit-icon" />
-                  <AiOutlineDelete className="delete-icon" />
-                </UserIcons>
-              </>
-            );
-          })}
+          <>
+            <UserList>
+              <h2>{props.employeeName}</h2>
+              <p>${props.employeeSalary}</p>
+            </UserList>
+            <UserIcons>
+              <FiEdit className="edit-icon" />
+              <AiOutlineDelete className="delete-icon" />
+            </UserIcons>
+          </>
         </ListContainer>
       </Container>
     </>
@@ -72,9 +54,7 @@ const ListContainer = styled.div`
   padding: 7px 1.5rem;
   display: flex;
   justify-content: space-between;
-  flex-direction: column;
-  `;
-
+`;
 
 // UserList styled-component
 const UserList = styled.div`

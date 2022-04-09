@@ -1,20 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import UserData from "./UserData";
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../store/uiSlice";
 
 const InputForm = () => {
-  const submitHandler = () => {};
+  const [inpName, setInpName] = useState("");
+  const [inpSalary, setInpSalary] = useState();
+  const distpatch = useDispatch();
+
+  const employeeList = useSelector((state) => state.ui.employees);
+
+  const nameChangeHandler = (event) => {
+    setInpName(event.target.value);
+  };
+
+  const salaryChangeHandler = (event) => {
+    setInpSalary(event.target.value);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    distpatch(uiActions.addEmployee({ id: 0, inpName, inpSalary }));
+  };
   return (
     <>
       <Container>
         <h3>Enter Employee Detail</h3>
         <FormContainer>
           <form onSubmit={submitHandler}>
-            <input type="text" placeholder="Name" />
-            <input type="number" placeholder="Salary" />
+            <input
+              type="text"
+              placeholder="Name"
+              onChange={nameChangeHandler}
+            />
+            <input
+              type="number"
+              placeholder="Salary"
+              onChange={salaryChangeHandler}
+            />
             <Button>Submit</Button>
           </form>
         </FormContainer>
       </Container>
+
+      <div className="user-list">
+        {employeeList.length <= 0 ? (
+          ""
+        ) : (
+          <UserData employeeName={inpName} employeeSalary={inpSalary} />
+        )}
+      </div>
     </>
   );
 };
