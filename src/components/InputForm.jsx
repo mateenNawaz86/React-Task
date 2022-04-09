@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-// import classes from "./InputForm.module.css";
 
 const InputForm = () => {
   const submitHandler = () => {};
   return (
     <>
       <Container>
+        <h3>Enter Employee Detail</h3>
         <FormContainer>
           <form onSubmit={submitHandler}>
             <input type="text" placeholder="Name" />
@@ -24,6 +24,14 @@ const Container = styled.div`
   background-color: orange;
   box-shadow: #000000b0 0 26px 30px -10px, #000000ba 0 16px 10px -10px;
   border-radius: 4px;
+  user-select: none;
+
+  h3 {
+    text-align: center;
+    padding: 1rem 0 5px 0;
+    letter-spacing: 1px;
+    font-family: "Grape Nuts", cursive;
+  }
 `;
 
 // FormContainer styled-component

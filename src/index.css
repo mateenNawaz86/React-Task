@@ -1,11 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Open+Sans:wght@300;400&display=swap");
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
 .card {
   width: 30rem;
   max-width: 95%;
-  margin: 5% auto;
+  margin: 3% auto;
+}
+
+.user-list {
+  width: 40rem;
+  max-width: 90%;
+  margin: 7% auto;
+}
+
+.edit-icon,
+.delete-icon {
+  font-size: 1.5rem;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  color: #1e90ff;
+}
+
+.delete-icon:hover {
+  color: red;
+}
+
+@media (max-width: 510px) {
+  .edit-icon,
+  .delete-icon {
+    font-size: 1rem;
+    margin: 5px;
+    cursor: pointer;
+  }
 }
