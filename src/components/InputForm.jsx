@@ -1,28 +1,39 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import UserData from "./UserData";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../store/uiSlice";
+import { FiEdit } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const InputForm = () => {
-  const [inpName, setInpName] = useState("");
-  const [inpSalary, setInpSalary] = useState();
-  const distpatch = useDispatch();
+  const [enteredName, setEnteredName] = useState("");
+  const [enteredSalary, setEnteredSalary] = useState();
+  const dispatch = useDispatch();
 
   const employeeList = useSelector((state) => state.ui.employees);
 
   const nameChangeHandler = (event) => {
-    setInpName(event.target.value);
+    setEnteredName(event.target.value);
   };
 
   const salaryChangeHandler = (event) => {
-    setInpSalary(event.target.value);
+    setEnteredSalary(event.target.value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    distpatch(uiActions.addEmployee({ id: 0, inpName, inpSalary }));
+    dispatch(
+      uiActions.addEmployee({
+        id: Math.floor(Math.random() * 1000),
+        enteredName,
+        enteredSalary,
+      })
+    );
   };
+
+  // const deleteHandler = () => {
+  //   distpatch(uiActions.deleteEmployee({ id: employeeList.id }));
+  // };
   return (
     <>
       <Container>
@@ -48,7 +59,30 @@ const InputForm = () => {
         {employeeList.length <= 0 ? (
           ""
         ) : (
-          <UserData employeeName={inpName} employeeSalary={inpSalary} />
+          <UserContainer>
+            <h1>Employee List</h1>
+            {employeeList.map((user, index) => {
+              return (
+                <ListContainer key={index}>
+                  <>
+                    <UserList>
+                      <h2>{user.enteredName}</h2>
+                      <p>${user.enteredSalary}</p>
+                    </UserList>
+                    <UserIcons>
+                      <FiEdit className="edit-icon" />
+                      <AiOutlineDelete
+                        className="delete-icon"
+                        onClick={() =>
+                          dispatch(uiActions.deleteEmployee({ id: user.id }))
+                        }
+                      />
+                    </UserIcons>
+                  </>
+                </ListContainer>
+              );
+            })}
+          </UserContainer>
         )}
       </div>
     </>
@@ -107,6 +141,72 @@ const Button = styled.button`
   &:hover {
     opacity: 0.9;
   }
+`;
+
+// UserContainer styled-component
+const UserContainer = styled.div`
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  user-select: none;
+  position: relative;
+
+  h1 {
+    font-family: "Grape Nuts", cursive;
+    text-align: center;
+    padding: 1rem 0;
+    letter-spacing: 1px;
+    font-size: 2rem;
+    color: #483d8b;
+  }
+
+  @media (max-width: 510px) {
+    h1 {
+      font-size: 1.2rem;
+    }
+  }
+`;
+
+// ListContainer styled-component
+const ListContainer = styled.div`
+  padding: 7px 1.5rem;
+  display: flex;
+  justify-content: space-between;
+`;
+
+// UserList styled-component
+const UserList = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    color: #48d1cc;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #4169e1;
+  }
+
+  @media (max-width: 510px) {
+    padding: 7px 0;
+
+    h2 {
+      font-size: 14px;
+    }
+
+    p {
+      font-size: 11px;
+    }
+  }
+`;
+
+// UserIcons styled-component
+const UserIcons = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.5rem 0;
 `;
 
 export default InputForm;

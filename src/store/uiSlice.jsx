@@ -4,13 +4,17 @@ const initialState = { employees: [] };
 
 const uiSlice = createSlice({
   name: "ui-slice",
-  initialState,
+  initialState, 
   reducers: {
     addEmployee(state, actions) {
       state.employees.push(actions.payload);
     },
+    deleteEmployee(state, action) {
+      state.employees = state.employees.filter(
+        (user) => user.id !== action.payload.id
+      );
+    },
     // updateEmployeeDetail(state, action) {},
-    // deleteEmployee(state, action) {},
   },
 });
 
