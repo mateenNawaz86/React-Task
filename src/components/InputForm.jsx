@@ -78,6 +78,19 @@ const InputForm = () => {
                         }
                       />
                     </UserIcons>
+                    <button
+                      onClick={() =>
+                        dispatch(
+                          uiActions.updateEmployee({
+                            id: user.id,
+                            enteredName: user.enteredName,
+                            enteredSalary: user.enteredSalary,
+                          })
+                        )
+                      }
+                    >
+                      Update
+                    </button>
                   </>
                 </ListContainer>
               );

@@ -4,7 +4,7 @@ const initialState = { employees: [] };
 
 const uiSlice = createSlice({
   name: "ui-slice",
-  initialState, 
+  initialState,
   reducers: {
     addEmployee(state, actions) {
       state.employees.push(actions.payload);
@@ -14,7 +14,25 @@ const uiSlice = createSlice({
         (user) => user.id !== action.payload.id
       );
     },
-    // updateEmployeeDetail(state, action) {},
+    updateEmployee(state, action) {
+      const newName = window.prompt(
+        "Enter new name",
+        action.payload.enteredName
+      );
+      const newSalary = window.prompt(
+        "Enter new salary",
+        action.payload.enteredSalary
+      );
+      if (newName) {
+        state.employees = state.employees.map((item) => {
+          if (item.id === action.payload.id) {
+            item.enteredName = newName;
+            item.enteredSalary = newSalary;
+          }
+          return item;
+        });
+      }
+    },
   },
 });
 
